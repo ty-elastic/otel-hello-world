@@ -1,0 +1,27 @@
+receivers: 
+  otlp:
+    protocols:
+      grpc:
+
+exporters:
+  logging:
+    loglevel: debug 
+  otlphttp/elastic: 
+    # Elastic APM server https endpoint without the "https://" prefix
+    endpoint: "${ELASTIC_APM_SERVER_ENDPOINT}"
+    compression: none
+    headers:
+      # Elastic APM Server secret token
+      Authorization: "Bearer ${ELASTIC_APM_SERVER_SECRET}"  
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [logging, otlphttp/elastic]
+    metrics:
+      receivers: [otlp]
+      exporters: [logging, otlphttp/elastic]
+    logs: 
+      receivers: [otlp]
+      exporters: [logging, otlphttp/elastic]

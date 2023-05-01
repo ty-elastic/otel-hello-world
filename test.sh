@@ -1,0 +1,2 @@
+docker build -t otelhelloworld .
+docker run -e ELASTIC_APM_SERVER_ENDPOINT="https://c2e902165d524b86ad0f6a8a6ed665cd.apm.us-central1.gcp.cloud.es.io:443" -e ELASTIC_APM_SERVER_SECRET=DsHCiwdGn7Xux9Fhfy -it otelhelloworld
